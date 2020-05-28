@@ -1,0 +1,48 @@
+name: gatling
+
+image:
+  registry: quay.io
+  repo: giantswarm/gatling-app
+  tag: 0.0.0-ae445213c76ac52056ee410ccdb4ddb9e6637658
+
+# Settings to configure the Job spec.
+job:
+  # Attempt to run the job 5 times before marking as failed.
+  backoffLimit: 5
+
+  # Set the number of successful pod completions required to
+  # consider the job as complete.
+  completions: 1
+
+  # Set the maximum amount of pods allowed to run at the same
+  # time.
+  parallelism: 1
+
+pod:
+  userID: 1000
+  groupID: 1000
+  restartPolicy: OnFailure
+
+# Settings under the simulation key are used to customise the
+# Gatling run to your needs.
+simulation:
+  # Simulations provided via configMap will be ignored if a URL
+  # is provided below. If you are providing a simulation via a
+  # configMap then it should be created prior to deploying this
+  # app.
+  configMap:
+    # The name of the configMap containing the simulation to run.
+    name: ""
+
+  # The filename the simulation will be written out to in the
+  # pod's workdir. e.g. "NginxSimulation.scala"
+  filename: ""
+
+  # The name of the simulation to run, in the format
+  # `package.class`. e.g. "nginx.NginxSimulation"
+  name: ""
+
+  # The URL is a Gatling simulation configuration which must
+  # be hosted at an accessible location. If provided then it
+  # overrides any simulation configMaps.
+  url: ""

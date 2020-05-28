@@ -1,0 +1,59 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.name }}
+  labels:
+    job: {{ .Values.name }}
+spec:
+  backoffLimit: {{ .Values.job.backoffLimit }}
+  completions: {{ .Values.job.completions }}
+  parallelism: {{ .Values.job.parallelism }}
+  template:
+    metadata:
+      labels:
+        job: {{ .Values.name }}
+    spec:
+      serviceAccountName: {{ .Values.name }}
+      securityContext:
+        runAsUser: {{ .Values.pod.userID }}
+        runAsGroup: {{ .Values.pod.groupID }}
+      {{- if .Values.simulation.url }}
+      initContainers:
+      - name: download
+        image: {{ .Values.image.registry }}/{{ .Values.image.repo }}:{{ .Values.image.tag }}
+        command:
+        - /bin/bash
+        args:
+        - -c
+        - "wget -O user-files/simulations/{{ .Values.simulation.filename }} {{ .Values.simulation.url }}"
+        volumeMounts:
+        - name: simulationdir
+          mountPath: /opt/gatling/user-files/simulations
+      {{- end }}
+      containers:
+      - name: gatling
+        image: {{ .Values.image.registry }}/{{ .Values.image.repo }}:{{ .Values.image.tag }}
+        command:
+        - /bin/bash
+        args:
+        - -c
+        - "./bin/gatling.sh --simulation {{ .Values.simulation.name }} --results-folder ./results/"
+        volumeMounts:
+        - name: simulationdir
+      {{- if .Values.simulation.url }}
+          mountPath: /opt/gatling/user-files/simulations
+      {{- else }}
+          mountPath: /opt/gatling/user-files/simulations/{{ .Values.simulation.filename }}
+          subPath: {{ .Values.simulation.filename }}
+      {{- end }}
+      restartPolicy: {{ .Values.pod.restartPolicy }}
+      volumes:
+      - name: simulationdir
+      {{- if .Values.simulation.url }}
+        emptyDir: {}
+      {{- else }}
+        configMap:
+          defaultMode: 0666
+          name: {{ .Values.simulation.configMap.name }}
+          optional: true
+      {{- end }}

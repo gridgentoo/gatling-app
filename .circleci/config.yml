@@ -1,15 +1,27 @@
 version: 2.1
 orbs:
-  architect: giantswarm/architect@0.8.5
+  architect: giantswarm/architect@0.8.17
 
 workflows:
-  package-and-push-chart-on-tag:
+  build:
     jobs:
+      # Ensure that for every commit (all branches), and for every new release tag,
+      # an image is pushed to Quay.
+      - architect/push-to-docker:
+          name: push-to-quay
+          image: "quay.io/giantswarm/gatling-app"
+          username_envar: "QUAY_USERNAME"
+          password_envar: "QUAY_PASSWORD"
+          filters:
+            tags:
+              only: /^v.*/
+
+      # build the helm chart and push to the playground catalog.
       - architect/push-to-app-catalog:
-          name: "package and push {CHART-NAME} chart"
+          name: "package and push gatling-app chart"
           app_catalog: "giantswarm-playground-catalog"
           app_catalog_test: "giantswarm-playground-test-catalog"
-          chart: "{CHART-NAME}"
+          chart: "gatling-app"
           # Trigger job on git tag.
           filters:
             tags:
