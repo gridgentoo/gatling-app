@@ -57,3 +57,7 @@ spec:
           name: {{ .Values.simulation.configMap.name }}
           optional: true
       {{- end }}
+{{- if .Values.nodeAffinity.enabled }}
+      nodeSelector:
+        {{- toYaml .Values.nodeAffinity.selector | nindent 8 }}
+{{- end }}

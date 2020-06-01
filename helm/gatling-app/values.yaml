@@ -46,3 +46,9 @@ simulation:
   # be hosted at an accessible location. If provided then it
   # overrides any simulation configMaps.
   url: ""
+
+# Enable and give a proper NodeSelector to run the simulation on
+# a specific cluster node.
+nodeAffinity:
+  enabled: false
+  selector: {}
