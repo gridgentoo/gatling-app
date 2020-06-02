@@ -37,14 +37,13 @@ spec:
         - /bin/bash
         args:
         - -c
-        - "./bin/gatling.sh --simulation {{ .Values.simulation.name }} --results-folder ./results/"
+        - "{{- if .Values.simulation.configMap.name -}}cp /tmp/simulations/*.scala user-files/simulations/ && {{ end -}}./bin/gatling.sh --simulation {{ .Values.simulation.name }} --results-folder ./results/"
         volumeMounts:
         - name: simulationdir
       {{- if .Values.simulation.url }}
           mountPath: /opt/gatling/user-files/simulations
       {{- else }}
-          mountPath: /opt/gatling/user-files/simulations/{{ .Values.simulation.filename }}
-          subPath: {{ .Values.simulation.filename }}
+          mountPath: /tmp/simulations
       {{- end }}
       restartPolicy: {{ .Values.pod.restartPolicy }}
       volumes:
