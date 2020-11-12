@@ -12,3 +12,11 @@ updates:
   target-branch: master
   reviewers:
   - giantswarm/team-halo-engineers
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: "04:00"
+  target-branch: master
+  reviewers:
+  - giantswarm/team-halo-engineers
