@@ -10,11 +10,15 @@ updates:
       interval: weekly
       time: "04:00"
     open-pull-requests-limit: 10
+    reviewers:
+      - giantswarm/team-cabbage
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
       interval: weekly
       time: "04:00"
     open-pull-requests-limit: 10
+    reviewers:
+      - giantswarm/team-cabbage
     ignore:
       - dependency-name: zricethezav/gitleaks-action
