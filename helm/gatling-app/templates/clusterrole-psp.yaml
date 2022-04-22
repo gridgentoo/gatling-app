@@ -3,7 +3,7 @@ kind: ClusterRole
 metadata:
   name: {{ .Values.name }}-psp
   labels:
-    app: {{ .Values.name }}
+    {{- include "labels.common" . | nindent 4 }}
 rules:
   - apiGroups:
       - extensions

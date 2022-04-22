@@ -9,3 +9,5 @@ sources:
 - https://raw.githubusercontent.com/giantswarm/gatling-app/v[[ .Version ]]/README.md
 - https://github.com/gatling/gatling
 version: [[ .Version ]]
+annotations:
+  application.giantswarm.io/team: team-cabbage

@@ -2,8 +2,9 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ .Values.name }}
+  namespace: {{ .Release.Namespace }}
   labels:
-    job: {{ .Values.name }}
+    {{- include "labels.common" . | nindent 4 }}
 spec:
   backoffLimit: {{ .Values.job.backoffLimit }}
   completions: {{ .Values.job.completions }}
@@ -11,8 +12,9 @@ spec:
   template:
     metadata:
       labels:
-        job: {{ .Values.name }}
+        {{- include "labels.common" . | nindent 8 }}
     spec:
+      serviceAccount: {{ .Values.name }}
       serviceAccountName: {{ .Values.name }}
       securityContext:
         runAsUser: {{ .Values.pod.userID }}

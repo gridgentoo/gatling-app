@@ -7,7 +7,13 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Add additional labels ([#67](https://github.com/giantswarm/gatling-app/pull/67))
+
 ### Changed
+
+- Move labels to _helpers.tpl ([#67](https://github.com/giantswarm/gatling-app/pull/67))
 
 ## [v1.0.0] 2020-05-28
 
