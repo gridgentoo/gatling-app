@@ -15,6 +15,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Move labels to _helpers.tpl ([#67](https://github.com/giantswarm/gatling-app/pull/67))
 
+### Fixed
+
+- ATS failing to run
+
 ## [v1.0.0] 2020-05-28
 
 ### Added
