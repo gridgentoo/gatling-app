@@ -6,7 +6,7 @@
 # modified from https://github.com/denvazh/gatling to run
 # as an unprivileged user.
 
-FROM openjdk:8-jdk-alpine
+FROM openjdk:18-jdk-alpine
 
 # working directory for gatling
 WORKDIR /opt
