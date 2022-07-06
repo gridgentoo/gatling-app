@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  architect: giantswarm/architect@4.21.0
+  architect: giantswarm/architect@4.23.0
 
 workflows:
   build:
@@ -19,6 +19,7 @@ workflows:
       # build the helm chart and push to the playground catalog.
       - architect/push-to-app-catalog:
           name: "package and push gatling-app chart"
+          context: "architect"
           app_catalog: "giantswarm-playground-catalog"
           app_catalog_test: "giantswarm-playground-test-catalog"
           chart: "gatling-app"
