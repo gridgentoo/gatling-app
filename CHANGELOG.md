@@ -10,6 +10,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Added
 
 - Add additional labels ([#67](https://github.com/giantswarm/gatling-app/pull/67))
+- Update initContainer ([#79](https://github.com/giantswarm/gatling-app/pull/79))
 
 ### Changed
 
