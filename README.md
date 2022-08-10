@@ -2,16 +2,16 @@
 
 # gatling-app chart
 
-Giant Swarm offers a Gatling Managed App which can be installed in tenant clusters.
-Here we define the Gatling chart with its templates and default configuration.
+Giant Swarm предлагает управляемое приложение Gatling, которое может быть установлено в tenant clusters. 
+Здесь мы определяем Gatling chart с ее templates и конфигурацией по умолчанию.
 
 ## Required values
 
-In order to run Gatling, it must be provided with a simulation file which defines the
-test(s) to run. This configuration can be provided either as a `configMap`, or as a URL
-to a simulation hosted somewhere accessible by the cluster. If the URL method is used
-then an initContainer will download the simulation file before Gatling runs. These
-values must be provided via the `values.yaml` file.
+Для запуска Gatling необходимо предоставить файл моделирования, который определяет est(s) to run. 
+Эта конфигурация может быть предоставлена либо как СonfigMap, либо как URL-адрес для симуляции ыimulation hosted, 
+размещенной где-либо, в доступном месте кластера. 
+Если используется метод URL, то initContainer загрузит файл моделирования simulation file перед запуском Gatling. 
+Эти values должны быть предоставлены через `values.yaml` файл.
 
 Notes:
 
