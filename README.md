@@ -2,6 +2,9 @@
 
 # gatling-app chart
 
+# gating version
+ENV GATLING_VERSION 3.2.1
+
 Giant Swarm предлагает управляемое приложение Gatling, которое может быть установлено в tenant clusters. 
 Здесь мы определяем Gatling chart с ее templates и конфигурацией по умолчанию.
 
